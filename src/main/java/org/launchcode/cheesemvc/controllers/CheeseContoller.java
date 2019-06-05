@@ -46,4 +46,33 @@ class CheeseController {
         return "redirect:";
 
     }
+
+    @RequestMapping(value="remove", method = RequestMethod.GET)
+    public String displayRemovwCheeseForm(Model model){
+
+        model.addAttribute("title", "Remove Cheese");
+        model.addAttribute("cheesesExtended", cheesesExtended);
+
+        return "cheese/remove";
+
+    }
+
+    @RequestMapping(value="remove", method = RequestMethod.POST)
+    public String processRemoveCheeseForm(@RequestParam(required = false)  ArrayList<String> cheese){
+
+        if(cheese != null) {
+
+            for (int i = 0; i < cheese.size(); i++) {
+
+                if (cheesesExtended.containsKey(cheese.get(i))) {
+                    cheesesExtended.remove(cheese.get(i));
+                }
+            }
+         }
+
+
+        // redirect to /cheese
+        return "redirect:";
+
+    }
 }
